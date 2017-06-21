@@ -1,23 +1,49 @@
-# androidthings-sample-app-bma220-accelerometer
+Sample-app-BMA220-accelerometer for Android Things(TM) Dev. Prev 41 on the Raspberry Pi 3
+----------------------------------------------------------------------------------------------
 
-You'll need a Raspberry Pi 3, DFRobot - BMA220 Triaxial acceleration sensor, usual bread boarding components.
+Sample app to show how to use the Android Things user-space driver:
 
-Wiring Schematic:
-To do.
+This sample app apk contains the driver in an arr.
+The driver app is an aar file in the app/libs folder.  If you want the latest driver version please
+visit and download the above driver and then copy the bma220-debug.aar file over to the libs folder.
 
-Unfinished still much to do. Please check back soon.
+----------------------------------------------------------------------------------------------
+Prerequisties
 
-Sample application showing how - to user androidthings-example-driver-bma220-accelerometer
+Raspberry Pi 3 board with Android Things Dev. Prev. 4
 
-Download and build the driver.  Copy the aar to this projects libs folder. 
-Build this sample app:
+other boards ... to do
+
+
+-----------------------------------------------------------------------------------------------
+
+Wiring:
+Please see schematic  .... to do
+
+-----------------------------------------------------------------------------------------------
+
+Install and Build from the command line:
 
 ./gradlew build
 
-adb install -r app-debug.apk
+
+Use:
+adb connect Android.local
+
+adb logcat|grep Bma220Activity
+
+adb install -r app/build/outputs/apk/app-debug.apk
+
+adb shell am start uk.ty.androidthings.bma220exampleproject/.Bma220Activity
+
+adb logcat|grep Bma220Activity
 
 
-Where to find the Driver:
-https://github.com/tyharness/androidthings-example-driver-bma220-accelerometer
+------------------------------------------------------------------------------------------
+Install from Android Studio
+
+to do.
+
+
 
 
