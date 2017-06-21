@@ -3,9 +3,12 @@ Sample-app-BMA220-accelerometer for Android Things(TM) Dev. Prev 41 on the Raspb
 
 Sample app to show how to use the Android Things user-space driver:
 
-This sample app apk contains the driver in an arr.
-The driver app is an aar file in the app/libs folder.  If you want the latest driver version please
-visit and download the above driver and then copy the bma220-debug.aar file over to the libs folder.
+https://github.com/tyharness/androidthings-example-driver-bma220-accelerometer
+
+
+This sample app apk already contains the driver. The driver app is an aar file in the app/libs folder.  If you want the latest driver version please visit and download the above driver and then copy the bma220-debug.aar file over to the libs folder.
+
+Please note this software is a demo only and no where near production ready -- Use with caution.
 
 ----------------------------------------------------------------------------------------------
 Prerequisties
@@ -33,8 +36,6 @@ Install and Build from the command line:
 
 Use:
 adb connect Android.local
-
-adb logcat|grep Bma220Activity
 
 adb install -r app/build/outputs/apk/app-debug.apk
 
