@@ -14,6 +14,10 @@ Raspberry Pi 3 board with Android Things Dev. Prev. 4
 
 other boards ... to do
 
+Bosch BMA220 - Triple Axis Accelerometer BMA220(Tiny) SKU:SEN0168
+
+https://www.dfrobot.com/wiki/index.php/Triple_Axis_Accelerometer_BMA220(Tiny)_SKU:SEN0168
+
 
 -----------------------------------------------------------------------------------------------
 
