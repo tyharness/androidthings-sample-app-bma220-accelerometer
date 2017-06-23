@@ -17,9 +17,6 @@ import java.io.IOException;
 import uk.tyharness.things.contrib.driver.bma220.*;
 
 
-
-
-
 public class Bma220Activity  extends Activity implements SensorEventListener {
     private static final String TAG = Bma220Activity.class.getSimpleName();
     
@@ -27,11 +24,12 @@ public class Bma220Activity  extends Activity implements SensorEventListener {
     private bma220AccelerometerDriver mAccelerometerDriver;
     private SensorManager mSensorManager;
 
-    
+    private bma220 bma220device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         Log.d(TAG, "onCreate");
         
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -40,6 +38,8 @@ public class Bma220Activity  extends Activity implements SensorEventListener {
             public void onDynamicSensorConnected(Sensor sensor) {
                 if (sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
                     Log.i(TAG, "Accelerometer sensor connected");
+                    
+                  
                     mSensorManager.registerListener(Bma220Activity.this, sensor,
                             SensorManager.SENSOR_DELAY_NORMAL);
                 }
@@ -47,9 +47,38 @@ public class Bma220Activity  extends Activity implements SensorEventListener {
         });
         try {
             //mAccelerometerDriver = new bma220AccelerometerDriver(BoardDefaults.getI2CPort());
-            mAccelerometerDriver = new bma220AccelerometerDriver( "I2C1");
+            //use the boardsvariant class to accomadte multiple devices.
+            mAccelerometerDriver = new bma220AccelerometerDriver( "I2C1");//Raspberry Pi 3 only
             mAccelerometerDriver.register();
             Log.i(TAG, "Accelerometer driver registered");
+            
+         
+          
+            //what is the state of the registers
+            Log.i(TAG, "_00_REG_ChipID : "   + Integer.toHexString(mAccelerometerDriver._getChipID() ));           
+            Log.i(TAG, "_02_REG_ChipREV :  " + Integer.toHexString(mAccelerometerDriver._getChipREV() ));
+            
+            Log.i(TAG, "_0A_REG : "        + Integer.toHexString(mAccelerometerDriver._get_A_REG() ));
+            Log.i(TAG, "_0C_REG : "        + Integer.toHexString(mAccelerometerDriver._get_C_REG() ));
+            Log.i(TAG, "_0E_REG : "        + Integer.toHexString(mAccelerometerDriver._get_E_REG() ));
+            Log.i(TAG, "_10_REG : "        + Integer.toHexString(mAccelerometerDriver._get_10_REG() ));   
+            
+            Log.i(TAG, "_12_REG : "        + Integer.toHexString(mAccelerometerDriver._getOrientation() ));
+            Log.i(TAG, "_14_REG : "        + Integer.toHexString(mAccelerometerDriver._getTapDetection() ));
+         
+            Log.i(TAG, "_16_REG : "        + Integer.toHexString(mAccelerometerDriver._get_16_REG() ));
+            Log.i(TAG, "_18_REG : "        + Integer.toHexString(mAccelerometerDriver._get_18_REG() ));
+            Log.i(TAG, "_1A_REG : "        + Integer.toHexString(mAccelerometerDriver._get_1A_REG() ));
+            
+            Log.i(TAG, "_1C_REG : "        + Integer.toHexString(  mAccelerometerDriver._getLatching() ));           
+            Log.i(TAG, "_1E_REG : "        + Integer.toHexString(mAccelerometerDriver._getChipREV() ));
+            Log.i(TAG, "_20_FILTER_REG : " + Integer.toHexString(  mAccelerometerDriver._getFilterAndBandwidth()  ));
+            Log.i(TAG, "_22_Range REG : "  + Integer.toHexString(  mAccelerometerDriver._getRangeMode() )); 
+            
+            
+            
+           
+            
         } catch (IOException e) {
             Log.e(TAG, "Error initializing accelerometer driver: ", e);
         }
@@ -82,8 +111,17 @@ public class Bma220Activity  extends Activity implements SensorEventListener {
     
 @Override
     public void onSensorChanged(SensorEvent event) {
-        Log.i(TAG, "Accelerometer event: " +
+  
+  if (mAccelerometerDriver._getAccelerationState() == true){
+  
+        Log.i(TAG, "Acceleration XYZ[m/s^2] " +
                 event.values[0] + ", " + event.values[1] + ", " + event.values[2]);
+        
+         }
+      
+        
+        
+        
     }
 
     @Override
